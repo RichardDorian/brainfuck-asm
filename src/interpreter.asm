@@ -6,11 +6,9 @@
 interpret:
   mov r8, 0           ; data ptr
   mov r9, 0           ; instruction ptr
-  mov r14, 0          ; loop stack ptr
-  mov r15, code_size  ; program size
 
 interpret_loop:
-  cmp r9, r15         ; exit if program reached the end
+  cmp r9, code_size   ; exit if program reached the end
   jge exit
 
   set_instruction '+', interpret_inc_val
