@@ -19,6 +19,17 @@ For now the program is hardcoded because I really need to get some sleep. I'll d
 
 Heads up: that's a terrible idea. Here's the [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck) page. There, you can find a simple but useful table which states everything you can do. The language is pretty basic and easy to understand but is a living hell to use.
 
+## Exit codes
+
+It might go wrong. If, somehow, you manage to encounter a handled error the program will exit with a non zero exit code.
+
+If you are lucky, the program will tell you what happened. Most of the time it wont; especially if you catch a never seen before error (_or worse, a segfault_ 😱)
+
+| Exit code | Description     |
+| --------- | --------------- |
+| `0`       | No error        |
+| `1`       | Incorrect usage |
+
 ## Build
 
 If you want to build this project on your machine, I am so sorry but it's all lost and hopeless for you.. I am not joking, nobody can help you at this point.. Anyways, here's a simple guide:

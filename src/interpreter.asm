@@ -8,8 +8,8 @@ interpret:
   mov r9, 0           ; instruction ptr
 
 interpret_loop:
-  cmp r9, code_size   ; exit if program reached the end
-  jge exit
+  cmp r9, code_size   ; return if program reached the end
+  jge return
 
   set_instruction '+', interpret_inc_val
   set_instruction '-', interpret_dec_val

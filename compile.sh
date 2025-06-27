@@ -10,4 +10,4 @@ if [[ "$1" == "--dev" ]]; then
 fi
 
 nasm -f elf64 $DEBUG_FLAGS src/main.asm -o build/interpreter.o
-ld -x build/interpreter.o -o build/interpreter
+ld build/interpreter.o -o build/interpreter
