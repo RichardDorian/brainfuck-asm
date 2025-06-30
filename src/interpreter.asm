@@ -8,7 +8,7 @@ interpret:
   mov r9, 0           ; instruction ptr
 
 interpret_loop:
-  cmp r9, code_size   ; return if program reached the end
+  cmp r9, [code_size]   ; return if program reached the end
   jge return
 
   set_instruction '+', interpret_inc_val
@@ -19,7 +19,7 @@ interpret_loop:
   set_instruction ',', interpret_read
   set_instruction '[', interpret_loop_start
   set_instruction ']', interpret_loop_end
-
+  ; if the character is none of the above we simply continue
 next:
   inc r9
   jmp interpret_loop

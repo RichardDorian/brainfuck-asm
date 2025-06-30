@@ -25,10 +25,12 @@ It might go wrong. If, somehow, you manage to encounter a handled error the prog
 
 If you are lucky, the program will tell you what happened. Most of the time it wont; especially if you catch a never seen before error (_or worse, a segfault_ 😱)
 
-| Exit code | Description     |
-| --------- | --------------- |
-| `0`       | No error        |
-| `1`       | Incorrect usage |
+| Exit code | Description              |
+| --------- | ------------------------ |
+| `0`       | No error                 |
+| `1`       | Incorrect usage          |
+| `2`       | File is not accessible   |
+| `3`       | Error while opening file |
 
 ## Build
 
