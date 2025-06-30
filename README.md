@@ -9,10 +9,10 @@ A [Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) interpreter written in x8
 
 I have absolutely no idea why would you want to know how to use a Brainfuck interpreter.. Anyways, apparently you do so let's dive in!
 
-For now the program is hardcoded because I really need to get some sleep. I'll do program loading when my brain decides not to be a lazy fu\*\*. Here's how to run it:
+This interpreter is probably the simplest one you ever used. It takes a path to a Brainfuck file (with the bf file extension) as its first and only argument, interprets it and terminates.
 
 ```bash
-./interpreter
+./interpreter program.bf
 ```
 
 ## How do I write a Brainfuck program?
