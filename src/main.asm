@@ -1,8 +1,10 @@
+%define MAX_PROGRAM_SIZE 65535
+
 section .bss
   memory resb 30000
   stat resb 128 ; struct stat
 
-  code resb 65535
+  code resb MAX_PROGRAM_SIZE
   code_size resb 8
 
 section .data
@@ -12,6 +14,8 @@ section .data
   msg_noaccess_size equ $ - msg_noaccess
   msg_cannotopen db "Unable to open the given file", 10
   msg_cannotopen_size equ $ - msg_cannotopen
+  msg_program_too_big db "Program size exceeds limit of 65535 bytes.", 10
+  msg_program_too_big_size equ $ - msg_program_too_big
 
 section .text
   global _start
@@ -28,7 +32,9 @@ section .text
     mov rdi, rax
     call file_size
     mov [code_size], rax
-    ; TODO: allocate memory dynamically
+    cmp dword [code_size], MAX_PROGRAM_SIZE
+    jge program_too_big
+
     call read
     call close
     call interpret
@@ -40,6 +46,17 @@ section .text
   exit:
     mov rax, 60 ; exit
     mov rdi, 0x00 ; exit code 0
+    syscall
+
+  program_too_big:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, msg_program_too_big
+    mov rdx, msg_program_too_big_size
+    syscall
+
+    mov rax, 60
+    mov rdi, 0x04
     syscall
 
   %include "src/args.asm"
