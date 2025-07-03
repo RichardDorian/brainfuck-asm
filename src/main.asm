@@ -1,12 +1,13 @@
 %define MAX_PROGRAM_SIZE 65535
 %define MEMORY_SIZE 30000
+%define STRUCT_STAT_SIZE 128
 
 section .bss
   memory resb MEMORY_SIZE
-  stat resb 128 ; struct stat
+  stat resb STRUCT_STAT_SIZE
 
   code resb MAX_PROGRAM_SIZE
-  code_size resb 8
+  code_size resq 1
 
 section .data
   msg_usage db "Usage: ./interpreter <file>", 10
@@ -26,11 +27,11 @@ section .text
     pop rax ; pop argc
     pop rax ; pop program name
 
-    pop rdi ; pop filename pointer into rdi
+    pop rdi ; pop filename string pointer
     call can_access
-    call open_file ; puts the fd in rax
+    call open_file
     
-    mov rdi, rax
+    mov rdi, rax ; fd needs to be in rdi for fstat, read and close system calls
     call file_size
     mov [code_size], rax
     cmp dword [code_size], MAX_PROGRAM_SIZE
