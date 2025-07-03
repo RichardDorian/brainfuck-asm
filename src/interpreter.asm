@@ -34,12 +34,22 @@ interpret_dec_val:
 
 interpret_inc_ptr:
   inc r8
-  ; todo: add bounds checking so it is not possible to increment outside the 30k bytes buffer
+  cmp r8, MEMORY_SIZE
+  jge interpret_inc_ptr_overflow
+  jmp next
+
+interpret_inc_ptr_overflow:
+  mov r8, 0
   jmp next
 
 interpret_dec_ptr:
   dec r8
-  ; todo: add bounds checking so it is not possible to dec outside the 30k bytes buffer
+  cmp r8, 0
+  jl interpret_dec_ptr_overflow
+  jmp next
+
+interpret_dec_ptr_overflow:
+  mov r8, MEMORY_SIZE - 1
   jmp next
 
 interpret_write:

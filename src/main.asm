@@ -1,7 +1,8 @@
 %define MAX_PROGRAM_SIZE 65535
+%define MEMORY_SIZE 30000
 
 section .bss
-  memory resb 30000
+  memory resb MEMORY_SIZE
   stat resb 128 ; struct stat
 
   code resb MAX_PROGRAM_SIZE
